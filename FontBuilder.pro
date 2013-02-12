@@ -66,7 +66,8 @@ SOURCES += src/main.cpp \
     src/exporters/luaexporter.cpp \
     src/fontdrawwidget.cpp \
     src/fontloader.cpp \
-    src/exporters/sparrowexporter.cpp
+    src/exporters/sparrowexporter.cpp \
+    src/exporters/mmexporter.cpp
 HEADERS += src/fontbuilder.h \
     src/colorbutton.h \
     src/fontselectframe.h \
@@ -102,7 +103,8 @@ HEADERS += src/fontbuilder.h \
     src/exporters/luaexporter.h \
     src/fontdrawwidget.h \
     src/fontloader.h \
-    src/exporters/sparrowexporter.h
+    src/exporters/sparrowexporter.h \
+    src/exporters/mmexporter.h
 FORMS += src/fontbuilder.ui \
     src/fontselectframe.ui \
     src/fontoptionsframe.ui \
@@ -114,7 +116,7 @@ FORMS += src/fontbuilder.ui \
 TRANSLATIONS = fontbuilder_en.ts \
     fontbuilder_ru.ts
 QT += xml
-
+QT += widgets
 DESTDIR = bin
 OBJECTS_DIR = .obj
 MOC_DIR = .obj
@@ -131,9 +133,9 @@ mac {
     LIBS += -L/opt/local/lib
 }
 win32 { 
-    INCLUDEPATH += ../include
-    INCLUDEPATH += ../include/freetype2
-    LIBS += -L../lib \
+    INCLUDEPATH += include
+    INCLUDEPATH += include/freetype2
+    LIBS += -LE:/PROG/Fontbuilder/fontbuilder/lib \
         -lfreetype
 }
 linux*|freebsd* { 

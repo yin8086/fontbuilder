@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2010-2010 Andrey AndryBlack Kunitsyn
+ * Copyright (c) 2010-2011 Andrey AndryBlack Kunitsyn
  * email:support.andryblack@gmail.com
  *
  * Report bugs and download new versions at http://code.google.com/p/fontbuilder
@@ -27,18 +27,22 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+#ifndef MMEXPORTER_H
+#define MMEXPORTER_H
 
-#include <QtWidgets/QApplication>
-#include <QCoreApplication>
-#include "fontbuilder.h"
+#include "../abstractexporter.h"
 
-int main(int argc, char *argv[])
+class MMExporter : public AbstractExporter
 {
-    QApplication a(argc, argv);
-    QCoreApplication::setOrganizationName("AndryBlack");
-    QCoreApplication::setOrganizationDomain("andryblack.com");
-    QCoreApplication::setApplicationName("FontBuilder");
-    FontBuilder w;
-    w.show();
-    return a.exec();
-}
+Q_OBJECT
+public:
+    explicit MMExporter(QObject *parent = 0);
+protected:
+    virtual bool Export(QByteArray& out);
+signals:
+
+public slots:
+
+};
+
+#endif // MMEXPORTER_H
