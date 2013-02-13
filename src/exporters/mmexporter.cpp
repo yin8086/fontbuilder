@@ -44,43 +44,44 @@ MMExporter::MMExporter(QObject *parent):
 bool MMExporter::Export(QByteArray &out) {
 
     // line 1
-    QString res = QObject::tr("info face=\"%1\" ").arg(fontConfig()->family());
-    res += QObject::tr("bold=%1 ").arg(fontConfig()->bold());
-    res += QObject::tr("italic=%1 ").arg(fontConfig()->italic());
-    res += QObject::tr("charset=\"\" ");
-    res += QObject::tr("unicode=1 ");
-    res += QObject::tr("stretchH=%1 ").arg((int)fontConfig()->width());
-    res += QObject::tr("smooth=%1 ").arg(fontConfig()->antialiased()?1:0);
-    res += QObject::tr("aa=4 ");
-    res += QObject::tr("padding=%1,%2,%3,%4 ").arg(layoutConfig()->offsetTop())
+    QString res = QString("info face=\"%1\" ").arg(fontConfig()->family());
+    res += QString("bold=%1 ").arg(fontConfig()->bold());
+    res += QString("italic=%1 ").arg(fontConfig()->italic());
+    res += QString("charset=\"\" ");
+    res += QString("unicode=1 ");
+    res += QString("stretchH=%1 ").arg((int)fontConfig()->width());
+    res += QString("smooth=%1 ").arg(fontConfig()->antialiased()?1:0);
+    res += QString("aa=4 ");
+    res += QString("padding=%1,%2,%3,%4 ").arg(layoutConfig()->offsetTop())
             .arg(layoutConfig()->offsetRight()).arg(layoutConfig()->offsetBottom())
             .arg(layoutConfig()->offsetLeft());
-    res += QObject::tr("spacing=%1,%2 ").arg(fontConfig()->lineSpacing())
+    res += QString("spacing=%1,%2 ").arg(fontConfig()->lineSpacing())
             .arg(fontConfig()->charSpacing());
-    res += QObject::tr("outline=0\n");
+    res += QString("outline=0\n");
 
     // line 2
-    res += QObject::tr("common lineHeight=36 base=29 ");
-    res += QObject::tr("scaleW=%1 ").arg(texWidth());
-    res += QObject::tr("scaleH=%1 ").arg(texHeight());
-    res += QObject::tr("pages=1 packed=0 alphaChnl=0 redChnl=4 greenChnl=4 blueChnl=4\n");
+    res += QString("common lineHeight=36 base=29 ");
+    res += QString("scaleW=%1 ").arg(texWidth());
+    res += QString("scaleH=%1 ").arg(texHeight());
+    res += QString("pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0\n");
 
     // line 3
-    res += QObject::tr("page id=0 file=\"%1\"\n").arg(texFilename());
+    res += QString("page id=0 file=\"%1\"\n").arg(texFilename());
 
     // line 4
-    res += QObject::tr("chars count=%1\n").arg(symbols().size());
+    res += QString("chars count=%1\n").arg(symbols().size());
 
+    int offset = metrics().ascender;
     foreach (const Symbol& c , symbols()) {
-        QString chardef = QObject::tr("char id=%1 ").arg(c.id, -5);
-        chardef += QObject::tr("x=%1 ").arg(c.placeX, -5);
-        chardef += QObject::tr("y=%1 ").arg(c.placeY, -5);
-        chardef += QObject::tr("width=%1 ").arg(c.placeW, -5);
-        chardef += QObject::tr("height=%1 ").arg(c.placeH, -5);
-        chardef += QObject::tr("xoffset=%1 ").arg(c.offsetX, -5);
-        chardef += QObject::tr("yoffset=%1 ").arg(c.offsetY, -5);
-        chardef += QObject::tr("xadvance=%1 ").arg(c.advance, -5);
-        chardef += QObject::tr("page=0  chnl=15\n");
+        QString chardef = QString("char id=%1 ").arg(c.id, -5);
+        chardef += QString("x=%1 ").arg(c.placeX, -5);
+        chardef += QString("y=%1 ").arg(c.placeY, -5);
+        chardef += QString("width=%1 ").arg(c.placeW, -5);
+        chardef += QString("height=%1 ").arg(c.placeH, -5);
+        chardef += QString("xoffset=%1 ").arg(c.offsetX, -5);
+        chardef += QString("yoffset=%1 ").arg(offset - c.offsetY, -5);
+        chardef += QString("xadvance=%1 ").arg(c.advance, -5);
+        chardef += QString("page=0  chnl=15\n");
 
         res += chardef;
 

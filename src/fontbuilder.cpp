@@ -83,7 +83,7 @@ FontBuilder::FontBuilder(QWidget *parent) :
 
     m_output_config = new OutputConfig(this);
 
-    QSettings settings;
+    QSettings settings("FontBuilder.ini", QSettings::IniFormat);
     restoreGeometry(settings.value("geometry").toByteArray());
     readConfig(settings,"fontconfig",m_font_config);
     m_font_config->normalize();
@@ -141,7 +141,7 @@ FontBuilder::~FontBuilder()
 
 void FontBuilder::closeEvent(QCloseEvent *event)
  {
-     QSettings settings;
+     QSettings settings("FontBuilder.ini", QSettings::IniFormat);
      settings.setValue("geometry", saveGeometry());
      saveConfig(settings,"fontconfig",m_font_config);
      saveConfig(settings,"layoutconfig",m_layout_config);
@@ -333,6 +333,8 @@ void FontBuilder::on_pushButtonWriteFont_clicked()
          }
         delete exporter;
     }
+    QMessageBox::information(NULL, "Completed!", "Font successfully generated!",
+                             QMessageBox::Ok, QMessageBox::Ok);
 }
 
 void FontBuilder::onExternalImageChanged(const QString& fn) {

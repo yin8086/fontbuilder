@@ -182,7 +182,8 @@ bool FontRenderer::append_bitmap(ushort symbol) {
     int w = bm->width;
     int h = bm->rows;
     QImage img(w,h,QImage::Format_ARGB32);
-    img.fill(0x00ffffff);
+    //img.fill(0x00ffffff);
+    img.fill(qRgba(0, 0, 0, 0));
     const uchar* src = bm->buffer;
     //QColor bg = m_config->bgColor();
     //QColor fg = m_config->fgColor();
@@ -192,8 +193,11 @@ bool FontRenderer::append_bitmap(ushort symbol) {
             for (int col=0;col<w;col++) {
                  {
                     uchar s = src[col];
-                    *dst = qRgba(0xff,0xff,0xff,
-                            s);
+                    //*dst = qRgba(0xff,0xff,0xff,
+                    //        s);
+                    *dst = qRgba(s, s, s,
+                                 s);
+
                 }
                 dst++;
             }
@@ -205,6 +209,7 @@ bool FontRenderer::append_bitmap(ushort symbol) {
 
             for (int col=0;col<w/8;col++) {
                 uchar s = src[col];
+
                 *dst++ = qRgba(255,255,255,(s&(1<<7))?255:0);
                 *dst++ = qRgba(255,255,255,(s&(1<<6))?255:0);
                 *dst++ = qRgba(255,255,255,(s&(1<<5))?255:0);
@@ -213,11 +218,13 @@ bool FontRenderer::append_bitmap(ushort symbol) {
                 *dst++ = qRgba(255,255,255,(s&(1<<2))?255:0);
                 *dst++ = qRgba(255,255,255,(s&(1<<1))?255:0);
                 *dst++ = qRgba(255,255,255,(s&(1<<0))?255:0);
+
             }
             {
                 uchar s = src[w/8];
                 int num = 7;
                 switch (w%8) {
+
                 case 7:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
                 case 6:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
                 case 5:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
@@ -227,6 +234,7 @@ bool FontRenderer::append_bitmap(ushort symbol) {
                 case 1:  *dst++ = qRgba(255,255,255,(s&(1<<(num--)))?255:0);
                 case 0:
                     break;
+
                 }
             }
 

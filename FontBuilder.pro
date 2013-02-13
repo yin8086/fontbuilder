@@ -133,9 +133,9 @@ mac {
     LIBS += -L/opt/local/lib
 }
 win32 { 
-    INCLUDEPATH += include
-    INCLUDEPATH += include/freetype2
-    LIBS += -LE:/PROG/Fontbuilder/fontbuilder/lib \
+    INCLUDEPATH += ../include
+    INCLUDEPATH += ../include/freetype2
+    LIBS += -L../lib \
         -lfreetype
 }
 linux*|freebsd* { 
