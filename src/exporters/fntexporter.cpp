@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2010-2011 Andrey AndryBlack Kunitsyn
- * email:support.andryblack@gmail.com
+ * Copyright (c) 2010-2011 Stardrad Yin
+ * email:yin8086@gmail.com
  *
  * Report bugs and download new versions at http://code.google.com/p/fontbuilder
  *
@@ -28,20 +28,20 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "mmexporter.h"
+#include "fntexporter.h"
 #include "../fontconfig.h"
 #include "../layoutconfig.h"
 #include "../layoutdata.h"
 
 #include <QVector>
 #include <QString>
-MMExporter::MMExporter(QObject *parent):
+FntExporter::FntExporter(QObject *parent):
     AbstractExporter(parent)
 {
     setExtension("xml");
 }
 
-bool MMExporter::Export(QByteArray &out) {
+bool FntExporter::Export(QByteArray &out) {
 
     // line 1
     QString res = QString("info face=\"%1\" ").arg(fontConfig()->family());
@@ -92,6 +92,6 @@ bool MMExporter::Export(QByteArray &out) {
 
 }
 
-AbstractExporter* MMExporterFactoryFunc (QObject* parent) {
-    return new MMExporter(parent);
+AbstractExporter* FntExporterFactoryFunc (QObject* parent) {
+    return new FntExporter(parent);
 }

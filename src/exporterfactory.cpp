@@ -37,7 +37,7 @@ extern AbstractExporter* DivoExporterFactoryFunc (QObject*);
 extern AbstractExporter* NGLExporterFactoryFunc (QObject*);
 extern AbstractExporter* LuaExporterFactoryFunc (QObject*);
 extern AbstractExporter* SparrowExporterFactoryFunc (QObject*);
-extern AbstractExporter* MMExporterFactoryFunc (QObject*);
+extern AbstractExporter* FntExporterFactoryFunc (QObject*);
 
 ExporterFactory::ExporterFactory(QObject *parent) :
     QObject(parent)
@@ -48,7 +48,7 @@ ExporterFactory::ExporterFactory(QObject *parent) :
     m_factorys["NGL"] = &NGLExporterFactoryFunc;
     m_factorys["Lua table"] = &LuaExporterFactoryFunc;
     m_factorys["Sparrow"] = &SparrowExporterFactoryFunc;
-    m_factorys["MMSJ"] = &MMExporterFactoryFunc;
+    m_factorys["BMFont"] = &FntExporterFactoryFunc;
 }
 
 

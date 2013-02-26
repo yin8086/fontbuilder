@@ -84,12 +84,15 @@ FontBuilder::FontBuilder(QWidget *parent) :
     m_output_config = new OutputConfig(this);
 
     QSettings settings("FontBuilder.ini", QSettings::IniFormat);
-    restoreGeometry(settings.value("geometry").toByteArray());
-    readConfig(settings,"fontconfig",m_font_config);
-    m_font_config->normalize();
-    readConfig(settings,"layoutconfig",m_layout_config);
-    readConfig(settings,"outputconfig",m_output_config);
-    ui->checkBoxDrawGrid->setChecked(settings.value("draw_grid").toBool());
+    QStringList loadList = settings.childGroups();
+    loadList.removeOne("default");
+    m_model = new QStringListModel(this);
+    m_model->setStringList(loadList);
+
+    ui->listView->setModel(m_model);
+    ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    loadIni("default", false);
     ui->widgetFontPreview->setDrawGrid(ui->checkBoxDrawGrid->isChecked());
     connect(ui->checkBoxDrawGrid,SIGNAL(toggled(bool)),this,SLOT(on_checkBoxDrawGrid_toggled(bool)));
 
@@ -140,15 +143,10 @@ FontBuilder::~FontBuilder()
 
 
 void FontBuilder::closeEvent(QCloseEvent *event)
- {
-     QSettings settings("FontBuilder.ini", QSettings::IniFormat);
-     settings.setValue("geometry", saveGeometry());
-     saveConfig(settings,"fontconfig",m_font_config);
-     saveConfig(settings,"layoutconfig",m_layout_config);
-     saveConfig(settings,"outputconfig",m_output_config);
-     settings.setValue("draw_grid",ui->checkBoxDrawGrid->isChecked());
-     QMainWindow::closeEvent(event);
- }
+{
+    saveIni("default");
+    QMainWindow::closeEvent(event);
+}
 
 void FontBuilder::saveConfig(QSettings& settings,
                              const QString& name,
@@ -177,6 +175,37 @@ void FontBuilder::readConfig(QSettings& settings,
          if (settings.contains(name))
              object->setProperty(name,settings.value(name));
       }
+    settings.endGroup();
+}
+
+void FontBuilder::saveIni(const QString& setName) {
+    QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    settings.beginGroup(setName);
+    settings.setValue("geometry", saveGeometry());
+    saveConfig(settings,"fontconfig",m_font_config);
+    saveConfig(settings,"layoutconfig",m_layout_config);
+    saveConfig(settings,"outputconfig",m_output_config);
+    settings.setValue("draw_grid",ui->checkBoxDrawGrid->isChecked());
+    settings.endGroup();
+}
+
+void FontBuilder::loadIni(const QString& setName, bool isRun = true) {
+    QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    settings.beginGroup(setName);
+    if(!isRun)
+        restoreGeometry(settings.value("geometry").toByteArray());
+    readConfig(settings,"fontconfig",m_font_config);
+    m_font_config->normalize();
+    readConfig(settings,"layoutconfig",m_layout_config);
+    readConfig(settings,"outputconfig",m_output_config);
+    ui->checkBoxDrawGrid->setChecked(settings.value("draw_grid").toBool());
+    settings.endGroup();
+}
+
+void FontBuilder::removeIni(const QString& setName) {
+    QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    settings.beginGroup(setName);
+    settings.remove("");
     settings.endGroup();
 }
 
@@ -333,7 +362,7 @@ void FontBuilder::on_pushButtonWriteFont_clicked()
          }
         delete exporter;
     }
-    QMessageBox::information(NULL, "Completed!", "Font successfully generated!",
+    QMessageBox::information(this, "Completed!", "Font successfully generated!",
                              QMessageBox::Ok, QMessageBox::Ok);
 }
 
@@ -385,4 +414,68 @@ void FontBuilder::on_action_Open_triggered()
     }
 
 
+}
+
+void FontBuilder::on_addBtn_clicked()
+{
+    if(ui->lineEdit->text().isEmpty()) {
+        QMessageBox::warning(this, tr("Config Name Needed!"),
+                             tr("You must input a config name!"),
+                             QMessageBox::Ok, QMessageBox::Ok);
+        ui->lineEdit->setFocus();
+    }
+    else {
+        int row = m_model->rowCount();
+        QString setName = ui->lineEdit->text();
+        if(m_model->stringList().count(setName) > 0) {
+            QMessageBox::warning(this, tr("Config Name Existed!"),
+                                 tr("Config Name \"%1\" is existed!")
+                                 .arg(setName),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+            ui->lineEdit->setFocus();
+        }
+        else {
+            m_model->insertRows(row, 1);
+
+            QModelIndex index = m_model->index(row);
+            m_model->setData(index, setName);
+            saveIni(setName);
+            ui->lineEdit->setText("");
+        }
+
+    }
+}
+
+void FontBuilder::on_delBtn_clicked()
+{
+    if(m_model->rowCount() == 0) {
+        QMessageBox::warning(this, tr("No config available!"),
+                             tr("There is no config available to remove!"),
+                             QMessageBox::Ok, QMessageBox::Ok);
+    }
+    else {
+        QModelIndexList indexList = ui->listView->selectionModel()->selectedIndexes();
+        if(indexList.isEmpty()) {
+            QMessageBox::warning(this, tr("No Config Selected!"),
+                                 tr("There is no config being selected!"),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+        }
+        else {
+            QString setName = m_model->data(indexList[0], Qt::EditRole).toString();
+            QMessageBox::StandardButton rs =
+                    QMessageBox::question(this, tr("Are you sure ?"),
+                                          tr("Are you sure to delete the \"%1\" config")
+                                          .arg(setName));
+            if(rs == QMessageBox::Yes) {
+                m_model->removeRow(ui->listView->selectionModel()->selectedRows()[0].row());
+                removeIni(setName);
+            }
+        }
+    }
+
+}
+
+void FontBuilder::on_listView_activated(const QModelIndex &index)
+{
+    loadIni(m_model->data(index, Qt::EditRole).toString());
 }

@@ -33,6 +33,7 @@
 
 #include <QMainWindow>
 #include <QSettings>
+#include <QStringListModel>
 
 namespace Ui {
     class FontBuilder;
@@ -63,6 +64,9 @@ protected:
     void closeEvent(QCloseEvent *event);
     void saveConfig(QSettings& config,const QString& name,const QObject* obj);
     void readConfig(QSettings& config,const QString& name,QObject* obj);
+    void saveIni(const QString& setName);
+    void loadIni(const QString& setName, bool isRun);
+    void removeIni(const QString& setName);
 
 private:
 
@@ -78,6 +82,7 @@ private:
     ImageWriterFactory* m_image_writer_factory;
     AbstractImageWriter* m_image_writer;
     FontLoader*     m_font_loader;
+    QStringListModel* m_model;
 
     void setLayoutImage(const QImage& img);
 public slots:
@@ -95,6 +100,9 @@ private slots:
     void onSpacingChanged();
     void on_comboBox_currentIndexChanged(int index);
     void on_action_Open_triggered();
+    void on_addBtn_clicked();
+    void on_delBtn_clicked();
+    void on_listView_activated(const QModelIndex &index);
 };
 
 #endif // FONTBUILDER_H

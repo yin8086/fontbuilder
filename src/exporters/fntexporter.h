@@ -1,6 +1,6 @@
 /**
- * Copyright (c) 2010-2011 Andrey AndryBlack Kunitsyn
- * email:support.andryblack@gmail.com
+ * Copyright (c) 2010-2011 Stardrad Yin
+ * email:yin8086@gmail.com
  *
  * Report bugs and download new versions at http://code.google.com/p/fontbuilder
  *
@@ -27,16 +27,16 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
-#ifndef MMEXPORTER_H
-#define MMEXPORTER_H
+#ifndef FNTEXPORTER_H
+#define FNTEXPORTER_H
 
 #include "../abstractexporter.h"
 
-class MMExporter : public AbstractExporter
+class FntExporter : public AbstractExporter
 {
 Q_OBJECT
 public:
-    explicit MMExporter(QObject *parent = 0);
+    explicit FntExporter(QObject *parent = 0);
 protected:
     virtual bool Export(QByteArray& out);
 signals:
@@ -45,4 +45,4 @@ public slots:
 
 };
 
-#endif // MMEXPORTER_H
+#endif // FNTEXPORTER_H

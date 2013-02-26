@@ -67,7 +67,7 @@ SOURCES += src/main.cpp \
     src/fontdrawwidget.cpp \
     src/fontloader.cpp \
     src/exporters/sparrowexporter.cpp \
-    src/exporters/mmexporter.cpp
+    src/exporters/fntexporter.cpp
 HEADERS += src/fontbuilder.h \
     src/colorbutton.h \
     src/fontselectframe.h \
@@ -104,7 +104,7 @@ HEADERS += src/fontbuilder.h \
     src/fontdrawwidget.h \
     src/fontloader.h \
     src/exporters/sparrowexporter.h \
-    src/exporters/mmexporter.h
+    src/exporters/fntexporter.h
 FORMS += src/fontbuilder.ui \
     src/fontselectframe.ui \
     src/fontoptionsframe.ui \
