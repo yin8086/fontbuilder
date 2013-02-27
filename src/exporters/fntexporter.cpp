@@ -72,6 +72,8 @@ bool FntExporter::Export(QByteArray &out) {
     res += QString("chars count=%1\n").arg(symbols().size());
 
     int offset = metrics().ascender;
+    QString kernStrs;
+    int numKerns(0);
     foreach (const Symbol& c , symbols()) {
         QString chardef = QString("char id=%1 ").arg(c.id, -5);
         chardef += QString("x=%1 ").arg(c.placeX, -5);
@@ -85,6 +87,20 @@ bool FntExporter::Export(QByteArray &out) {
 
         res += chardef;
 
+
+        typedef QMap<ushort,int>::ConstIterator Kerning;
+        for(Kerning k = c.kerning.begin(); k != c.kerning.end(); k++) {
+            kernStrs += QString("kerning first=%1 ").arg(c.id);
+            kernStrs += QString("second=%1 ").arg(k.key());
+            kernStrs += QString("amount=%1\n").arg(k.value());
+            numKerns++;
+        }
+
+    }
+
+    if(numKerns > 0) {
+        res += QString("kernings count=%1\n").arg(numKerns);
+        res += kernStrs;
     }
 
     out = res.toUtf8();
