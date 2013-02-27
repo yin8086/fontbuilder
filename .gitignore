@@ -4,5 +4,3 @@ object_script.*
 .obj
 bin
 FontBuilder.pro.user
-/include
-/lib

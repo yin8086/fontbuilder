@@ -92,7 +92,15 @@ FontBuilder::FontBuilder(QWidget *parent) :
     ui->listView->setModel(m_model);
     ui->listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    loadIni("default", false);
+    settings.beginGroup("default");
+    restoreGeometry(settings.value("geometry").toByteArray());
+    readConfig(settings,"fontconfig",m_font_config);
+    m_font_config->normalize();
+    readConfig(settings,"layoutconfig",m_layout_config);
+    readConfig(settings,"outputconfig",m_output_config);
+    ui->checkBoxDrawGrid->setChecked(settings.value("draw_grid").toBool());
+    settings.endGroup();
+
     ui->widgetFontPreview->setDrawGrid(ui->checkBoxDrawGrid->isChecked());
     connect(ui->checkBoxDrawGrid,SIGNAL(toggled(bool)),this,SLOT(on_checkBoxDrawGrid_toggled(bool)));
 
@@ -117,7 +125,7 @@ FontBuilder::FontBuilder(QWidget *parent) :
             ui->comboBoxLayouter->currentText());
 
     ui->frameOutput->setConfig(m_output_config);
-    ui->frameFontSelect->setConfig(m_font_config);
+    ui->frameFontSelect->setConfig(m_font_config, true);
 
     ui->fontTestFrame->setLayoutData(m_layout_data);
     ui->fontTestFrame->setRendererData(&m_font_renderer->data());
@@ -189,17 +197,50 @@ void FontBuilder::saveIni(const QString& setName) {
     settings.endGroup();
 }
 
-void FontBuilder::loadIni(const QString& setName, bool isRun = true) {
+void FontBuilder::loadIni(const QString& setName) {
     QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    bool font_config_block = m_font_config->blockSignals(true);
+    QString dirStr = m_font_config->path();
+
     settings.beginGroup(setName);
-    if(!isRun)
-        restoreGeometry(settings.value("geometry").toByteArray());
     readConfig(settings,"fontconfig",m_font_config);
     m_font_config->normalize();
     readConfig(settings,"layoutconfig",m_layout_config);
     readConfig(settings,"outputconfig",m_output_config);
     ui->checkBoxDrawGrid->setChecked(settings.value("draw_grid").toBool());
     settings.endGroup();
+
+    ui->widgetFontPreview->setDrawGrid(ui->checkBoxDrawGrid->isChecked());
+
+    bool b = ui->comboBoxLayouter->blockSignals(true);
+    ui->frameCharacters->setConfig(m_font_config);
+    ui->frameFontOptions->setConfig(m_font_config);
+    if (!m_layout_config->layouter().isEmpty()) {
+        for (int i=0;i<ui->comboBoxLayouter->count();i++)
+            if (ui->comboBoxLayouter->itemText(i)==m_layout_config->layouter())
+                ui->comboBoxLayouter->setCurrentIndex(i);
+    }
+    ui->frameLayoutConfig->setConfig(m_layout_config);
+
+    ui->comboBoxLayouter->blockSignals(b);
+    this->on_comboBoxLayouter_currentIndexChanged(
+            ui->comboBoxLayouter->currentText());
+
+    ui->frameOutput->setConfig(m_output_config);
+    ui->frameFontSelect->setConfig(m_font_config, dirStr != m_font_config->path());
+
+    ui->fontTestFrame->setLayoutData(m_layout_data);
+    ui->fontTestFrame->setRendererData(&m_font_renderer->data());
+    ui->fontTestFrame->setFontConfig(m_font_config);
+
+    ui->widgetFontPreview->setLayoutData(m_layout_data);
+    ui->widgetFontPreview->setRendererData(&m_font_renderer->data());
+    ui->widgetFontPreview->setLayoutConfig(m_layout_config);
+
+    m_font_config->blockSignals(font_config_block);
+    m_font_config->emmitChange();
+
+    ui->fontTestFrame->refresh();
 }
 
 void FontBuilder::removeIni(const QString& setName) {
@@ -467,7 +508,7 @@ void FontBuilder::on_delBtn_clicked()
                                           tr("Are you sure to delete the \"%1\" config")
                                           .arg(setName));
             if(rs == QMessageBox::Yes) {
-                m_model->removeRow(ui->listView->selectionModel()->selectedRows()[0].row());
+                m_model->removeRow(indexList[0].row());
                 removeIni(setName);
             }
         }
@@ -478,4 +519,25 @@ void FontBuilder::on_delBtn_clicked()
 void FontBuilder::on_listView_activated(const QModelIndex &index)
 {
     loadIni(m_model->data(index, Qt::EditRole).toString());
+}
+
+void FontBuilder::on_saveBtn_clicked()
+{
+    if(m_model->rowCount() == 0) {
+        QMessageBox::warning(this, tr("No config available!"),
+                             tr("There is no config available to save!"),
+                             QMessageBox::Ok, QMessageBox::Ok);
+    }
+    else {
+        QModelIndexList indexList = ui->listView->selectionModel()->selectedIndexes();
+        if(indexList.isEmpty()) {
+            QMessageBox::warning(this, tr("No Config Selected!"),
+                                 tr("There is no config being selected!"),
+                                 QMessageBox::Ok, QMessageBox::Ok);
+        }
+        else {
+            QString setName = m_model->data(indexList[0], Qt::EditRole).toString();
+            saveIni(setName);
+        }
+    }
 }

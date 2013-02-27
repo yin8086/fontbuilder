@@ -65,7 +65,7 @@ protected:
     void saveConfig(QSettings& config,const QString& name,const QObject* obj);
     void readConfig(QSettings& config,const QString& name,QObject* obj);
     void saveIni(const QString& setName);
-    void loadIni(const QString& setName, bool isRun);
+    void loadIni(const QString& setName);
     void removeIni(const QString& setName);
 
 private:
@@ -103,6 +103,7 @@ private slots:
     void on_addBtn_clicked();
     void on_delBtn_clicked();
     void on_listView_activated(const QModelIndex &index);
+    void on_saveBtn_clicked();
 };
 
 #endif // FONTBUILDER_H

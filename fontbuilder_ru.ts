@@ -63,97 +63,117 @@
     </message>
     <message>
         <location filename="src/fontbuilder.ui" line="32"/>
-        <location filename="src/fontbuilder.ui" line="44"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.ui" line="61"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.ui" line="68"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.ui" line="75"/>
+        <source>Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.ui" line="83"/>
+        <location filename="src/fontbuilder.ui" line="95"/>
         <source>Font</source>
         <translation type="unfinished">Шрифт</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="63"/>
+        <location filename="src/fontbuilder.ui" line="114"/>
         <source>Options</source>
         <translation type="unfinished">Свойства</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="96"/>
+        <location filename="src/fontbuilder.ui" line="147"/>
         <source>Characters</source>
         <translation type="unfinished">Символы</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="106"/>
+        <location filename="src/fontbuilder.ui" line="157"/>
         <source>Layout</source>
         <translation type="unfinished">Размещение</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="112"/>
+        <location filename="src/fontbuilder.ui" line="163"/>
         <source>Layout engine</source>
         <translation type="unfinished">Размещатель</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="139"/>
+        <location filename="src/fontbuilder.ui" line="190"/>
         <source>Output</source>
         <translation type="unfinished">Результат</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="148"/>
+        <location filename="src/fontbuilder.ui" line="199"/>
         <source>Write font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="163"/>
+        <location filename="src/fontbuilder.ui" line="214"/>
         <source>Font image preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="243"/>
+        <location filename="src/fontbuilder.ui" line="294"/>
         <source>Draw grid</source>
         <translation type="unfinished">Рисовать сетку</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="250"/>
+        <location filename="src/fontbuilder.ui" line="301"/>
         <source>0x0</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="257"/>
+        <location filename="src/fontbuilder.ui" line="308"/>
         <source>scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="274"/>
+        <location filename="src/fontbuilder.ui" line="325"/>
         <source>50%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="279"/>
+        <location filename="src/fontbuilder.ui" line="330"/>
         <source>100%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="284"/>
+        <location filename="src/fontbuilder.ui" line="335"/>
         <source>200%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="289"/>
+        <location filename="src/fontbuilder.ui" line="340"/>
         <source>400%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="294"/>
+        <location filename="src/fontbuilder.ui" line="345"/>
         <source>800%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="303"/>
+        <location filename="src/fontbuilder.ui" line="354"/>
         <source>Test font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="326"/>
+        <location filename="src/fontbuilder.ui" line="377"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.ui" line="335"/>
+        <location filename="src/fontbuilder.ui" line="386"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
@@ -162,41 +182,99 @@
         <translation type="obsolete">Предпросмотр ()</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.cpp" line="226"/>
+        <location filename="src/fontbuilder.cpp" line="295"/>
         <source>Image size: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.cpp" line="279"/>
-        <location filename="src/fontbuilder.cpp" line="312"/>
+        <location filename="src/fontbuilder.cpp" line="348"/>
+        <location filename="src/fontbuilder.cpp" line="381"/>
         <source>Unknown exporter :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.cpp" line="294"/>
+        <location filename="src/fontbuilder.cpp" line="363"/>
         <source>Error opening file :</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.cpp" line="300"/>
+        <location filename="src/fontbuilder.cpp" line="369"/>
         <source>Error on save image :
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.cpp" line="324"/>
+        <location filename="src/fontbuilder.cpp" line="393"/>
         <source>Error on save description :
 </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.cpp" line="378"/>
+        <location filename="src/fontbuilder.cpp" line="447"/>
         <source>Select file</source>
         <translation type="unfinished">Выберите файл</translation>
     </message>
     <message>
-        <location filename="src/fontbuilder.cpp" line="380"/>
+        <location filename="src/fontbuilder.cpp" line="449"/>
         <source>Font file(*.xml)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="462"/>
+        <source>Config Name Needed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="463"/>
+        <source>You must input a config name!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="471"/>
+        <source>Config Name Existed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="472"/>
+        <source>Config Name &quot;%1&quot; is existed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="492"/>
+        <location filename="src/fontbuilder.cpp" line="526"/>
+        <source>No config available!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="493"/>
+        <source>There is no config available to remove!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="499"/>
+        <location filename="src/fontbuilder.cpp" line="533"/>
+        <source>No Config Selected!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="500"/>
+        <location filename="src/fontbuilder.cpp" line="534"/>
+        <source>There is no config being selected!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="506"/>
+        <source>Are you sure ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="507"/>
+        <source>Are you sure to delete the &quot;%1&quot; config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="src/fontbuilder.cpp" line="527"/>
+        <source>There is no config available to save!</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -481,39 +559,39 @@
         <translation type="unfinished">Фрейм</translation>
     </message>
     <message>
-        <location filename="src/outputframe.ui" line="44"/>
+        <location filename="src/outputframe.ui" line="35"/>
         <source>./</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/outputframe.ui" line="54"/>
+        <location filename="src/outputframe.ui" line="45"/>
         <source>Output directory:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/outputframe.ui" line="71"/>
+        <location filename="src/outputframe.ui" line="62"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/outputframe.ui" line="83"/>
-        <location filename="src/outputframe.ui" line="155"/>
+        <location filename="src/outputframe.ui" line="74"/>
+        <location filename="src/outputframe.ui" line="146"/>
         <source>File name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/outputframe.ui" line="103"/>
-        <location filename="src/outputframe.ui" line="162"/>
+        <location filename="src/outputframe.ui" line="94"/>
+        <location filename="src/outputframe.ui" line="153"/>
         <source>Format:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/outputframe.ui" line="120"/>
+        <location filename="src/outputframe.ui" line="111"/>
         <source>Write grid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="src/outputframe.ui" line="140"/>
+        <location filename="src/outputframe.ui" line="131"/>
         <source>Description</source>
         <translation type="unfinished"></translation>
     </message>

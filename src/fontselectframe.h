@@ -65,7 +65,7 @@ public:
     FontSelectFrame(QWidget *parent);
     ~FontSelectFrame();
 
-    void setConfig(FontConfig* config);
+    void setConfig(FontConfig* config, bool isFirst);
 protected:
     void changeEvent(QEvent *e);
 

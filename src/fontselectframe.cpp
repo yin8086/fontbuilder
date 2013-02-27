@@ -77,12 +77,15 @@ void FontSelectFrame::changeEvent(QEvent *e)
     }
 }
 
-void FontSelectFrame::setConfig(FontConfig* config) {
+void FontSelectFrame::setConfig(FontConfig* config, bool isFirst = false) {
     m_config = 0;
     if (config) {
         bool b = config->blockSignals(true);
-        if (!config->path().isEmpty())
+        if (!config->path().isEmpty() && isFirst)
             setFontsDirectory(config->path());
+        else if(!m_database.isEmpty()) {
+            ui->comboBoxFamily->setCurrentIndex(0);
+        }
         if (!config->filename().isEmpty())
             selectFile(config->filename(),config->faceIndex());
         else if (!m_database.isEmpty()) {
@@ -128,6 +131,7 @@ void FontSelectFrame::setFontsDirectory(QString dir_name) {
             QStringList()
             << "*.ttf"
             << "*.pcf"
+            << "*.ttc"
             << "*.pcf.gz"
             << "*.otf",
             QDir::Files | QDir::Readable
