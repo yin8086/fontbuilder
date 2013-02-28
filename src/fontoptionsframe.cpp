@@ -76,12 +76,6 @@ void FontOptionsFrame::setConfig(FontConfig *config) {
     }
 }
 
-
-void FontOptionsFrame::on_checkBoxAutohinting_toggled(bool checked)
-{
-
-}
-
 void FontOptionsFrame::on_checkBoxMissingGlypths_toggled(bool checked)
 {
     if (m_config) m_config->setRenderMissing(checked);

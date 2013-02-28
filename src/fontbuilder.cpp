@@ -119,12 +119,15 @@ FontBuilder::FontBuilder(QWidget *parent) :
 
     m_image_writer_factory = new ImageWriterFactory(this);
     ui->frameOutput->setImageWriters(m_image_writer_factory->names());
+    ui->frameOutput->setChnlTypes(
+                QStringList() <<"Alpha" << "RGB");
 
     ui->comboBoxLayouter->blockSignals(b);
     this->on_comboBoxLayouter_currentIndexChanged(
             ui->comboBoxLayouter->currentText());
 
     ui->frameOutput->setConfig(m_output_config);
+    m_font_renderer->renderAs(m_output_config->chnlType(), false);
     ui->frameFontSelect->setConfig(m_font_config, true);
 
     ui->fontTestFrame->setLayoutData(m_layout_data);
@@ -227,6 +230,7 @@ void FontBuilder::loadIni(const QString& setName) {
             ui->comboBoxLayouter->currentText());
 
     ui->frameOutput->setConfig(m_output_config);
+    m_font_renderer->renderAs(m_output_config->chnlType(), false);
     ui->frameFontSelect->setConfig(m_font_config, dirStr != m_font_config->path());
 
     ui->fontTestFrame->setLayoutData(m_layout_data);
@@ -339,6 +343,7 @@ void FontBuilder::on_pushButtonWriteFont_clicked()
 {
     QDir dir(m_output_config->path());
     QString texture_filename;
+    m_font_renderer->renderAs(m_output_config->chnlType());
     setLayoutImage(m_layout_data->image());
     if (m_output_config->writeImage()) {
         delete m_image_writer;
@@ -351,6 +356,7 @@ void FontBuilder::on_pushButtonWriteFont_clicked()
             return;
         }
 
+        exporter->setChnlTypes(m_output_config->chnlType());
         exporter->setData(m_layout_data,m_layout_config,m_font_renderer->data());
         texture_filename = m_output_config->imageName();
         texture_filename+="."+exporter->extension();

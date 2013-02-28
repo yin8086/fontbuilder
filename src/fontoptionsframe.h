@@ -63,7 +63,6 @@ private slots:
     void on_horizontalSliderBold_valueChanged(int value);
     void on_checkBoxSmoothing_toggled(bool checked);
     void on_checkBoxMissingGlypths_toggled(bool checked);
-    void on_checkBoxAutohinting_toggled(bool checked);
     void on_comboBox_Hinting_currentIndexChanged(int index);
 };
 

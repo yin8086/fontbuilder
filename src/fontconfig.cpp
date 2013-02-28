@@ -139,6 +139,13 @@ void FontConfig::setItalic(int b) {
     }
 }
 
+void FontConfig::setShadow(int b) {
+    if (m_shadow != b) {
+        m_shadow = b;
+        renderingOptionsChanged();
+    }
+}
+
 void FontConfig::setBold(int b) {
     if (m_bold!=b) {
         m_bold = b;

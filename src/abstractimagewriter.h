@@ -59,7 +59,7 @@ public:
     QImage* Read(QFile& file);
 
     void setData(const LayoutData* data,const LayoutConfig* config,const RendererData& rendered);
-
+    void setChnlTypes(const QString& type) { m_chnl_type = type; }
     void forget();
     void watch(const QString& file);
 signals:
@@ -88,6 +88,8 @@ protected:
     virtual bool Export(QFile& file) = 0;
     virtual QImage* reload( QFile& file) { Q_UNUSED(file);return 0;}
     QImage buildImage();
+
+    QString m_chnl_type;
 protected slots:
     void onFileChanged(const QString& fn);
     void onReload();

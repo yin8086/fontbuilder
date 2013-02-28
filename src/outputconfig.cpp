@@ -29,13 +29,14 @@
  */
 
 #include "outputconfig.h"
-
+#include <QMetaEnum>
 OutputConfig::OutputConfig(QObject *parent) :
     QObject(parent)
 {
     m_write_image = true;
     m_write_description = true;
     m_image_format = "PNG";
+    m_chnl_type = "Alpha";
 }
 
 void OutputConfig::setImageName(const QString& name) {
@@ -51,3 +52,5 @@ void OutputConfig::setDescriptionName(const QString& name) {
         descriptionNameChanged(name);
     }
 }
+
+

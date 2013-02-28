@@ -33,6 +33,7 @@
 
 #include <QObject>
 #include <QImage>
+#include <QStringList>
 
 class OutputConfig : public QObject
 {
@@ -67,6 +68,10 @@ public:
     bool writeDescription() const { return m_write_description;}
     void setWriteDescription(bool write) { m_write_description = write;}
     Q_PROPERTY(bool writeDescription READ writeDescription WRITE setWriteDescription );
+
+    const QString& chnlType() const { return m_chnl_type; }
+    void setChnlType(const QString& type) {m_chnl_type = type;}
+    Q_PROPERTY(QString chnlType READ chnlType WRITE setChnlType );
 private:
     QString m_path;
     bool    m_write_image;
@@ -75,10 +80,13 @@ private:
     bool    m_write_description;
     QString m_description_name;
     QString m_description_format;
+    QString m_chnl_type;
+
 signals:
     void imageNameChanged(const QString&);
     void descriptionNameChanged(const QString&);
 public slots:
+
 
 };
 

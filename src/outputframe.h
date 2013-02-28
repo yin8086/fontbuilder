@@ -47,6 +47,7 @@ public:
 
     void setExporters(const QStringList& exporters);
     void setImageWriters(const QStringList& writers);
+    void setChnlTypes(const QStringList& types);
     void setConfig(OutputConfig* config);
 
 protected:
@@ -68,6 +69,7 @@ private slots:
     void on_lineEditDescriptionFilename_editingFinished( );
     void on_pushButtonSelectPath_clicked();
 
+    void on_comboBoxImageChannels_currentIndexChanged(const QString &arg1);
 };
 
 #endif // OUTPUTFRAME_H

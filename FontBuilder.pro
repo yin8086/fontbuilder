@@ -122,7 +122,7 @@ OBJECTS_DIR = .obj
 MOC_DIR = .obj
 UI_DIR = .obj
 TARGET = FontBuilder
-
+CONFIG += C++11
 INCLUDEPATH+=src/
 mac { 
     INCLUDEPATH += ../include
@@ -133,9 +133,9 @@ mac {
     LIBS += -L/opt/local/lib
 }
 win32 { 
-    INCLUDEPATH += ../include
-    INCLUDEPATH += ../include/freetype2
-    LIBS += -L../lib \
+    INCLUDEPATH += ../x86/include
+    INCLUDEPATH += ../x86/include/freetype2
+    LIBS += -L../x86/lib \
         -lfreetype
 }
 linux*|freebsd* { 
@@ -143,4 +143,5 @@ linux*|freebsd* {
     PKGCONFIG += freetype2
 }
 OTHER_FILES += fontbuilder_ru.ts \
-    fontbuilder_en.ts
+    fontbuilder_en.ts \
+    fontbuilder_cn.ts

@@ -55,6 +55,7 @@ public:
     const RendererData& data() const { return m_rendered;}
     void LockAll();
     void SetImage(ushort symb,const QImage& img);
+    void renderAs(const QString& type, bool render = true);
 private:
     const FontConfig* m_config;
     FT_Library m_ft_library;
@@ -63,13 +64,14 @@ private:
     void rasterize();
     RendererData m_rendered;
     QVector<LayoutChar> m_chars;
+    QString m_chnl_type;
     void clear_bitmaps();
     bool append_bitmap(ushort symbol);
     void append_kerning(ushort symbol,const ushort* other,int amount);
 signals:
     void imagesChanged();
     void imagesChanged(const QVector<LayoutChar>&);
-public slots:
+
 private slots:
     void on_fontFileChanged();
     void on_fontFaceIndexChanged();

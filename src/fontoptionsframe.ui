@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>338</width>
-    <height>272</height>
+    <width>388</width>
+    <height>340</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -23,12 +23,6 @@
    <locale language="English" country="UnitedStates"/>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="sizeConstraint">
-    <enum>QLayout::SetMinimumSize</enum>
-   </property>
-   <property name="margin">
-    <number>0</number>
-   </property>
    <item>
     <layout class="QGridLayout" name="gridLayout_4">
      <item row="1" column="2" colspan="3">
@@ -133,11 +127,37 @@
     </layout>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout_3" columnminimumwidth="0,0,0">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetMinimumSize</enum>
-     </property>
-     <item row="3" column="2">
+    <layout class="QGridLayout" name="gridLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelBold_t">
+       <property name="text">
+        <string>Faux bold</string>
+       </property>
+       <property name="buddy">
+        <cstring>horizontalSliderBold</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLabel" name="labelBold">
+       <property name="minimumSize">
+        <size>
+         <width>32</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::PlainText</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
       <widget class="QSlider" name="horizontalSliderBold">
        <property name="minimum">
         <number>-10</number>
@@ -159,33 +179,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="labelBold_t">
-       <property name="text">
-        <string>Faux bold</string>
-       </property>
-       <property name="buddy">
-        <cstring>horizontalSliderBold</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QSlider" name="horizontalSliderItalic">
-       <property name="minimum">
-        <number>-20</number>
-       </property>
-       <property name="maximum">
-        <number>20</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="tickPosition">
-        <enum>QSlider::TicksBothSides</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Faux italic</string>
@@ -195,26 +189,7 @@
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QLabel" name="labelBold">
-       <property name="minimumSize">
-        <size>
-         <width>32</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>0</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::PlainText</enum>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
+     <item row="1" column="1">
       <widget class="QLabel" name="labelItalic">
        <property name="minimumSize">
         <size>
@@ -230,6 +205,55 @@
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QSlider" name="horizontalSliderItalic">
+       <property name="minimum">
+        <number>-20</number>
+       </property>
+       <property name="maximum">
+        <number>20</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksBothSides</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Shadow</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QSlider" name="horizontalSliderItalic_2">
+       <property name="minimum">
+        <number>0</number>
+       </property>
+       <property name="maximum">
+        <number>3</number>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="tickPosition">
+        <enum>QSlider::TicksBothSides</enum>
        </property>
       </widget>
      </item>
@@ -337,6 +361,12 @@
     </widget>
    </item>
   </layout>
+  <zorder>groupBox_2</zorder>
+  <zorder>groupBox</zorder>
+  <zorder>labelBold</zorder>
+  <zorder>label_8</zorder>
+  <zorder>label_9</zorder>
+  <zorder>horizontalSliderItalic_2</zorder>
  </widget>
  <resources/>
  <connections/>

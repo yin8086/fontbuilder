@@ -79,6 +79,9 @@ void OutputFrame::setConfig(OutputConfig* config) {
         for (int i=0;i<ui->comboBoxImageFormat->count();i++)
             if (ui->comboBoxImageFormat->itemText(i)==config->imageFormat())
                 ui->comboBoxImageFormat->setCurrentIndex(i);
+        for (int i=0;i<ui->comboBoxImageChannels->count();i++)
+            if (ui->comboBoxImageChannels->itemText(i)==config->chnlType())
+                ui->comboBoxImageChannels->setCurrentIndex(i);
         ui->groupBoxImage->setChecked(config->writeImage());
         if (ui->groupBoxDescription->isEnabled())
             ui->groupBoxDescription->setChecked(config->writeDescription());
@@ -110,6 +113,7 @@ void OutputFrame::onImageNameChanged(const QString& s) {
 void OutputFrame::onDescriptionNameChanged(const QString& s) {
     ui->lineEditDescriptionFilename->setText(s);
 }
+
 
 void OutputFrame::on_lineEditImageFilename_editingFinished()
 {
@@ -155,8 +159,20 @@ void OutputFrame::setImageWriters(const QStringList& writers) {
     ui->comboBoxImageFormat->blockSignals(bs);
 }
 
+void OutputFrame::setChnlTypes(const QStringList& types) {
+    bool bs = ui->comboBoxImageChannels->blockSignals(true);
+    ui->comboBoxImageChannels->clear();
+    ui->comboBoxImageChannels->addItems(types);
+    ui->comboBoxImageChannels->blockSignals(bs);
+
+}
 
 void OutputFrame::on_comboBoxDescriptionType_currentIndexChanged(QString name)
 {
     if (m_config) m_config->setDescriptionFormat(name);
+}
+
+void OutputFrame::on_comboBoxImageChannels_currentIndexChanged(const QString &type)
+{
+    if (m_config) m_config->setChnlType(type);
 }
