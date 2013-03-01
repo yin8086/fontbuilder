@@ -63,7 +63,10 @@ bool FntExporter::Export(QByteArray &out) {
     res += QString("common lineHeight=36 base=29 ");
     res += QString("scaleW=%1 ").arg(texWidth());
     res += QString("scaleH=%1 ").arg(texHeight());
-    res += QString("pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0\n");
+    if(m_chnl_type == "RGB")
+        res += QString("pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0\n");
+    else if(m_chnl_type == "Alpha")
+        res += QString("pages=1 packed=0 alphaChnl=0 redChnl=4 greenChnl=4 blueChnl=4\n");
 
     // line 3
     res += QString("page id=0 file=\"%1\"\n").arg(texFilename());

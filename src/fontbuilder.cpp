@@ -389,6 +389,7 @@ void FontBuilder::on_pushButtonWriteFont_clicked()
             msgBox.exec();
             return;
         }
+        exporter->setChnlTypes(m_output_config->chnlType());
         exporter->setFontConfig(m_font_config,m_layout_config);
         exporter->setData(m_layout_data,m_font_renderer->data());
         exporter->setTextureFilename(texture_filename);

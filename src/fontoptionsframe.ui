@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
+    <width>406</width>
     <height>340</height>
    </rect>
   </property>
@@ -128,6 +128,25 @@
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout_2">
+     <item row="1" column="1">
+      <widget class="QLabel" name="labelItalic">
+       <property name="minimumSize">
+        <size>
+         <width>32</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::PlainText</enum>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="labelBold_t">
        <property name="text">
@@ -157,6 +176,16 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelItalic_t">
+       <property name="text">
+        <string>Faux italic</string>
+       </property>
+       <property name="buddy">
+        <cstring>horizontalSliderItalic</cstring>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="2">
       <widget class="QSlider" name="horizontalSliderBold">
        <property name="minimum">
@@ -179,29 +208,10 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Faux italic</string>
-       </property>
-       <property name="buddy">
-        <cstring>horizontalSliderItalic</cstring>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLabel" name="labelItalic">
-       <property name="minimumSize">
-        <size>
-         <width>32</width>
-         <height>0</height>
-        </size>
-       </property>
+     <item row="2" column="1">
+      <widget class="QLabel" name="labelShadow">
        <property name="text">
         <string>0</string>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::PlainText</enum>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -225,24 +235,17 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="label_8">
+      <widget class="QLabel" name="labelShadow_t">
        <property name="text">
         <string>Shadow</string>
        </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>0</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
+       <property name="buddy">
+        <cstring>horizontalSliderShadow</cstring>
        </property>
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="QSlider" name="horizontalSliderItalic_2">
+      <widget class="QSlider" name="horizontalSliderShadow">
        <property name="minimum">
         <number>0</number>
        </property>
@@ -361,12 +364,6 @@
     </widget>
    </item>
   </layout>
-  <zorder>groupBox_2</zorder>
-  <zorder>groupBox</zorder>
-  <zorder>labelBold</zorder>
-  <zorder>label_8</zorder>
-  <zorder>label_9</zorder>
-  <zorder>horizontalSliderItalic_2</zorder>
  </widget>
  <resources/>
  <connections/>

@@ -51,6 +51,7 @@ public:
     const QString& getErrorString() const { return m_error_string;}
     const QString& getExtension() const { return m_extension;}
 
+    void setChnlTypes(const QString& type) { m_chnl_type = type;}
     bool Write(QByteArray& out);
 
     void setFontConfig(const FontConfig* config,const LayoutConfig* layout) { m_font_config = config;m_layout_config=layout;}
@@ -89,6 +90,8 @@ protected:
     const RenderedMetrics& metrics() const { return m_metrics;}
     int height() const;
     virtual bool Export(QByteArray& out) = 0;
+
+    QString m_chnl_type;
 private:
      QVector<Symbol> m_symbols;
 };
