@@ -84,6 +84,7 @@ FontBuilder::FontBuilder(QWidget *parent) :
     m_output_config = new OutputConfig(this);
 
     QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
     QStringList loadList = settings.childGroups();
     loadList.removeOne("default");
     m_model = new QStringListModel(this);
@@ -196,6 +197,7 @@ void FontBuilder::readConfig(QSettings& settings,
 
 void FontBuilder::saveIni(const QString& setName) {
     QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
     settings.beginGroup(setName);
     settings.setValue("geometry", saveGeometry());
     saveConfig(settings,"fontconfig",m_font_config);
@@ -207,6 +209,7 @@ void FontBuilder::saveIni(const QString& setName) {
 
 void FontBuilder::loadIni(const QString& setName) {
     QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
     bool font_config_block = m_font_config->blockSignals(true);
     QString dirStr = m_font_config->path();
 
@@ -257,6 +260,7 @@ void FontBuilder::loadIni(const QString& setName) {
 
 void FontBuilder::removeIni(const QString& setName) {
     QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
     settings.beginGroup(setName);
     settings.remove("");
     settings.endGroup();
