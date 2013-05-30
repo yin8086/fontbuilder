@@ -141,6 +141,11 @@ FontBuilder::FontBuilder(QWidget *parent) :
     m_font_config->blockSignals(font_config_block);
     m_font_config->emmitChange();
 
+    if(settings.contains("default/outputconfig/descriptionName"))
+        m_output_config->setDescriptionName(settings.value("default/outputconfig/descriptionName").toString());
+    if(settings.contains("default/outputconfig/imageName"))
+        m_output_config->setImageName(settings.value("default/outputconfig/imageName").toString());
+
     connect(m_font_config,SIGNAL(spacingChanged()),this,SLOT(onSpacingChanged()));
     ui->fontTestFrame->refresh();
 
@@ -243,6 +248,9 @@ void FontBuilder::loadIni(const QString& setName) {
 
     m_font_config->blockSignals(font_config_block);
     m_font_config->emmitChange();
+
+    m_output_config->setDescriptionName(settings.value(setName + "/outputconfig/descriptionName").toString());
+    m_output_config->setImageName(settings.value(setName + "/outputconfig/imageName").toString());
 
     ui->fontTestFrame->refresh();
 }
@@ -546,5 +554,12 @@ void FontBuilder::on_saveBtn_clicked()
             QString setName = m_model->data(indexList[0], Qt::EditRole).toString();
             saveIni(setName);
         }
+    }
+}
+
+void FontBuilder::cmdLineMode() {
+    foreach( QString iniF, m_model->stringList()) {
+        loadIni(iniF);
+        on_pushButtonWriteFont_clicked();
     }
 }

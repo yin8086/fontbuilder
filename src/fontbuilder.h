@@ -57,6 +57,7 @@ class FontBuilder : public QMainWindow {
     Q_OBJECT
 public:
     FontBuilder(QWidget *parent = 0);
+    void cmdLineMode();
     ~FontBuilder();
 
 protected:
