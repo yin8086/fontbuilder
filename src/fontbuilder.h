@@ -57,7 +57,7 @@ class FontBuilder : public QMainWindow {
     Q_OBJECT
 public:
     FontBuilder(QWidget *parent = 0);
-    void cmdLineMode();
+    void cmdLineMode(const QString &setName);
     ~FontBuilder();
 
 protected:
@@ -66,7 +66,7 @@ protected:
     void saveConfig(QSettings& config,const QString& name,const QObject* obj);
     void readConfig(QSettings& config,const QString& name,QObject* obj);
     void saveIni(const QString& setName);
-    void loadIni(const QString& setName);
+    void loadIni(const QString& setName, QSettings& settings);
     void removeIni(const QString& setName);
 
 private:
@@ -84,6 +84,7 @@ private:
     AbstractImageWriter* m_image_writer;
     FontLoader*     m_font_loader;
     QStringListModel* m_model;
+    bool m_cmd_mode;
 
     void setLayoutImage(const QImage& img);
 public slots:

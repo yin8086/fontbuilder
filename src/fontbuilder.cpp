@@ -39,6 +39,7 @@
 #include <QDir>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QProgressDialog>
 
 #include "fontconfig.h"
 #include "fontrenderer.h"
@@ -57,7 +58,7 @@ FontBuilder::FontBuilder(QWidget *parent) :
     m_image_writer(0)
 {
     ui->setupUi(this);
-
+    m_cmd_mode = false;
 
 
     m_font_config = new FontConfig(this);
@@ -207,9 +208,7 @@ void FontBuilder::saveIni(const QString& setName) {
     settings.endGroup();
 }
 
-void FontBuilder::loadIni(const QString& setName) {
-    QSettings settings("FontBuilder.ini", QSettings::IniFormat);
-    settings.setIniCodec("UTF-8");
+void FontBuilder::loadIni(const QString& setName, QSettings& settings) {
     bool font_config_block = m_font_config->blockSignals(true);
     QString dirStr = m_font_config->path();
 
@@ -374,6 +373,7 @@ void FontBuilder::on_pushButtonWriteFont_clicked()
         texture_filename+="."+exporter->extension();
         QString filename = dir.filePath(texture_filename);
 
+
         QFile file(this);
         file.setFileName(filename);
         if (!file.open(QIODevice::WriteOnly)) {
@@ -406,6 +406,7 @@ void FontBuilder::on_pushButtonWriteFont_clicked()
         exporter->setData(m_layout_data,m_font_renderer->data());
         exporter->setTextureFilename(texture_filename);
         QString filename = dir.filePath(m_output_config->descriptionName());
+
         filename+="."+exporter->getExtension();
         QByteArray data;
         if (!exporter->Write(data)) {
@@ -422,7 +423,8 @@ void FontBuilder::on_pushButtonWriteFont_clicked()
          }
         delete exporter;
     }
-    QMessageBox::information(this, "Completed!", "Font successfully generated!",
+    if (!m_cmd_mode)
+        QMessageBox::information(this, "Completed!", "Font successfully generated!",
                              QMessageBox::Ok, QMessageBox::Ok);
 }
 
@@ -537,7 +539,9 @@ void FontBuilder::on_delBtn_clicked()
 
 void FontBuilder::on_listView_activated(const QModelIndex &index)
 {
-    loadIni(m_model->data(index, Qt::EditRole).toString());
+    QSettings settings("FontBuilder.ini", QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
+    loadIni(m_model->data(index, Qt::EditRole).toString(), settings);
 }
 
 void FontBuilder::on_saveBtn_clicked()
@@ -561,9 +565,30 @@ void FontBuilder::on_saveBtn_clicked()
     }
 }
 
-void FontBuilder::cmdLineMode() {
-    foreach( QString iniF, m_model->stringList()) {
-        loadIni(iniF);
+void FontBuilder::cmdLineMode(const QString& setName) {
+    m_cmd_mode = true;
+
+    QSettings settings(setName, QSettings::IniFormat);
+    settings.setIniCodec("UTF-8");
+
+    QStringList loadList = settings.childGroups();
+    loadList.removeOne("default");
+
+    //QMessageBox::information(this, "Completed!", QString("%1").arg(loadList.size()),
+    //                     QMessageBox::Ok, QMessageBox::Ok);
+    int i = 0;
+    QProgressDialog progress("Generating Fonts", QString(), 0,
+                             loadList.size(), this);
+
+    progress.setModal(true);
+    foreach( QString iniF, loadList) {
+        progress.setValue(i++);
+        loadIni(iniF, settings);
         on_pushButtonWriteFont_clicked();
+        if (m_image_writer)
+            m_image_writer->forget();
     }
+    progress.setValue(i);
+    QMessageBox::information(this, "Completed!", "Font successfully generated!",
+                         QMessageBox::Ok, QMessageBox::Ok);
 }

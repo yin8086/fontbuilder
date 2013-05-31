@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("andryblack.com");
     QCoreApplication::setApplicationName("FontBuilder");
     FontBuilder w;
-    if(argc == 2 && QString(argv[1]) == "1") {
-        w.cmdLineMode();
+    if(argc == 2 && QString(argv[1]).toUpper().endsWith(".INI")) {
+        w.cmdLineMode(QString(argv[1]));
         a.quit();
         return  0;
     }
